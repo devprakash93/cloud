@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>ESP32 Relay Control — Cloud</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Exo+2:wght@300;600;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<header>
+  <div class="logo-bar">
+    <div class="logo-icon">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13 3L4 14h7l-1 7 9-11h-7l1-7z"/>
+      </svg>
+    </div>
+    <h1>ESP32 <span>Relay</span> Cloud</h1>
+  </div>
+  <div class="subtitle">Firebase Realtime Database &nbsp;|&nbsp; 4-Channel Panel</div>
+  <div class="conn-row">
+    <span id="conn-status">&#9679; CONNECTING...</span>
+  </div>
+  <p class="cloud-hint">Control from anywhere — ESP32 syncs via Firebase</p>
+</header>
+
+<div class="relay-grid">
+  <div class="relay-card" id="card-1">
+    <div class="card-header">
+      <div>
+        <div class="relay-label">Channel 01 &middot; IC1 Q0</div>
+        <div class="relay-name">Relay 1</div>
+      </div>
+      <div class="led"></div>
+    </div>
+    <div class="status-badge" id="badge-1">&#9679; INACTIVE</div>
+    <button class="toggle-btn" onclick="toggle(1)">Turn ON</button>
+  </div>
+
+  <div class="relay-card" id="card-2">
+    <div class="card-header">
+      <div>
+        <div class="relay-label">Channel 02 &middot; IC2 Q0</div>
+        <div class="relay-name">Relay 2</div>
+      </div>
+      <div class="led"></div>
+    </div>
+    <div class="status-badge" id="badge-2">&#9679; INACTIVE</div>
+    <button class="toggle-btn" onclick="toggle(2)">Turn ON</button>
+  </div>
+
+  <div class="relay-card" id="card-3">
+    <div class="card-header">
+      <div>
+        <div class="relay-label">Channel 03 &middot; IC3 Q0</div>
+        <div class="relay-name">Relay 3</div>
+      </div>
+      <div class="led"></div>
+    </div>
+    <div class="status-badge" id="badge-3">&#9679; INACTIVE</div>
+    <button class="toggle-btn" onclick="toggle(3)">Turn ON</button>
+  </div>
+
+  <div class="relay-card" id="card-4">
+    <div class="card-header">
+      <div>
+        <div class="relay-label">Channel 04 &middot; IC3 Q1</div>
+        <div class="relay-name">Relay 4</div>
+      </div>
+      <div class="led"></div>
+    </div>
+    <div class="status-badge" id="badge-4">&#9679; INACTIVE</div>
+    <button class="toggle-btn" onclick="toggle(4)">Turn ON</button>
+  </div>
+</div>
+
+<div class="master-panel">
+  <div class="master-title">// Master Controls</div>
+  <div class="master-btns">
+    <button class="master-btn all-on" onclick="sendCmd('9')">&#9889; All ON</button>
+    <button class="master-btn all-off" onclick="sendCmd('0')">&#9632; All OFF</button>
+  </div>
+</div>
+
+<div class="log-panel">
+  <div class="log-title">System Log</div>
+  <div id="log-output"></div>
+</div>
+
+<script type="module" src="script.js"></script>
+</body>
+</html>

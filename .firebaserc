@@ -1,0 +1,5 @@
+{
+  "projects": {
+    "default": "esp32-and-relay-cloud-project"
+  }
+}

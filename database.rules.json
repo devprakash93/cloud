@@ -1,0 +1,15 @@
+{
+  "rules": {
+    "devices": {
+      "$deviceId": {
+        ".read": "auth != null",
+        ".write": "auth != null",
+        "state": { ".validate": "newData.isString() && newData.val().matches(/^[01]{4}$/)" },
+        "command": { ".validate": "newData.isString() && newData.val().matches(/^[0-9]?$/)" },
+        "online": { ".validate": "newData.isBoolean()" },
+        "lastSeen": { ".validate": "newData.isNumber()" },
+        "log": { ".validate": "newData.isString() && newData.val().length < 120" }
+      }
+    }
+  }
+}
