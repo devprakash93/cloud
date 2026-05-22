@@ -2,13 +2,14 @@
 // Auto-generated from Firebase Console → Project settings → Your apps → Web app
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyC0VYQAtK8QTWiTT9_zIHdUH-GO5f4pEOw",
-  authDomain: "iot-based-billing-system-4a81a.firebaseapp.com",
-  databaseURL: "https://iot-based-billing-system-4a81a-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "iot-based-billing-system-4a81a",
-  storageBucket: "iot-based-billing-system-4a81a.firebasestorage.app",
-  messagingSenderId: "598914711592",
-  appId: "1:598914711592:web:6cc51a1f42a4ff2c87351d",
+  apiKey: "AIzaSyBM_mziuGxRkAvKNI-vhewBJ8puDUYwoM8",
+  authDomain: "iot-billing-system-8f450.firebaseapp.com",
+  databaseURL: "https://iot-billing-system-8f450-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "iot-billing-system-8f450",
+  storageBucket: "iot-billing-system-8f450.firebasestorage.app",
+  messagingSenderId: "440806501071",
+  appId: "1:440806501071:web:b28bdcc0f1131b3dcea5ba",
+  measurementId: "G-BMCJ0GEXXT"
 };
 
 export const DEVICE_ID = "esp32relay";
