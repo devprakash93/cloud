@@ -316,7 +316,7 @@ void publishState(String logMsg) {
 
   firebasePut("online", "true");
 
-  firebasePut("lastSeen", String(millis()));
+  firebasePut("lastSeen", "{\".sv\": \"timestamp\"}");
 
   if (logMsg.length() > 0) {
     firebasePut("log", "\"" + logMsg + "\"");
@@ -375,7 +375,21 @@ void setup() {
 void loop() {
 
   static unsigned long lastPoll = 0;
+  static unsigned long lastHeartbeat = 0;
+  static unsigned long lastWiFiCheck = 0;
 
+  // 1. WiFi Connection Watchdog — check every 10 seconds
+  if (millis() - lastWiFiCheck > 10000) {
+    lastWiFiCheck = millis();
+    if (WiFi.status() != WL_CONNECTED) {
+      Serial.println("WiFi connection lost! Reconnecting...");
+      WiFi.disconnect();
+      connectWiFi();
+      firebaseSignIn();
+    }
+  }
+
+  // 2. Poll Firebase commands every 500ms
   if (millis() - lastPoll > 500) {
 
     lastPoll = millis();
@@ -399,6 +413,12 @@ void loop() {
 
       lastCommand = "";
     }
+  }
+
+  // 3. Heartbeat — update Firebase server timestamp every 15 seconds
+  if (millis() - lastHeartbeat > 15000) {
+    lastHeartbeat = millis();
+    firebasePut("lastSeen", "{\".sv\": \"timestamp\"}");
   }
 
   delay(10);

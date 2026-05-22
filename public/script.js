@@ -83,7 +83,15 @@ function addLog(msg) {
   while (el.children.length > 30) el.removeChild(el.lastChild);
 }
 
+let lastDeviceData = null;
+
 function checkDeviceOnline(data) {
+  if (data !== undefined) {
+    lastDeviceData = data;
+  } else {
+    data = lastDeviceData;
+  }
+
   const online = data && data.online === true;
   const lastSeen = data && data.lastSeen;
   if (!online || !lastSeen) {
@@ -93,6 +101,11 @@ function checkDeviceOnline(data) {
   const ageMs = Date.now() - lastSeen;
   setStatus(ageMs < 45000);
 }
+
+// Periodically check online status every 5 seconds
+setInterval(() => {
+  checkDeviceOnline();
+}, 5000);
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
