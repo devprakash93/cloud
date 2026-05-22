@@ -83,6 +83,11 @@ function addLog(msg) {
   while (el.children.length > 30) el.removeChild(el.lastChild);
 }
 
+let serverTimeOffset = 0;
+onValue(ref(db, ".info/serverTimeOffset"), (snap) => {
+  serverTimeOffset = snap.val() || 0;
+});
+
 let lastDeviceData = null;
 
 function checkDeviceOnline(data) {
@@ -98,7 +103,8 @@ function checkDeviceOnline(data) {
     setStatus(false);
     return;
   }
-  const ageMs = Date.now() - lastSeen;
+  const serverTime = Date.now() + serverTimeOffset;
+  const ageMs = serverTime - lastSeen;
   setStatus(ageMs < 45000);
 }
 
